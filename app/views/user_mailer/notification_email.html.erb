@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+  </head>
+  <body>
+    <h1>Welcome to jungle.com, <%= @order.email %></h1>
+    <p>
+      You have successfully and item or multiple items from Jungle.com.<br>
+    </p>
+    <p>
+      Here is the summary of your order:
+    </p>
+    <h2>Order #<%= @order.id %></h2>
+      <ul>
+        <% @order_total = 0 %>
+        <% @order.line_items.each do |line_item| %>
+          <%= render 'orders/order', :line_item => line_item %>
+        <% end %>
+      </ul>
+
+
+    <h1>Order Total: <%= @order_total %></h1>
+
+    <p>Thanks for buying things and have a great day!</p>
+  </body>
+</html>

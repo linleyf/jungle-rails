@@ -1,0 +1,13 @@
+Thank you for purchasing <%= @order.email %>
+===============================================
+ 
+Order #<%= @order.id %>
+
+	  <% @order_total = 0 %>
+	  <% @order.line_items.each do |line_item| %>
+	    <%= render 'orders/order', :line_item => line_item %>
+	  <% end %>
+
+Order Total: <%= @order_total %>
+ 
+Thanks for joining and have a great day!
