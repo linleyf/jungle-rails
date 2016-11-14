@@ -1,5 +1,9 @@
 <section class="cart-show">
+ <% if cart = {} %>
 
+ <p> Checkout more items <a href="/">here!</a></p>
+
+ <% else %>
   <header class="page-header">
     <h1>My Cart</h1>
   </header>
@@ -49,5 +53,7 @@
       <% end %>
     </div>
   </div>
-
+<% end %>
 </section>
+
+
