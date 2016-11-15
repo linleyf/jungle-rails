@@ -13,6 +13,16 @@ def open_asset(file_name)
   File.open(Rails.root.join('db', 'seed_assets', file_name))
 end
 
+#Add a method for generating the password digest manually: Returns the hash digest of the given string.
+# source: http://stackoverflow.com/questions/31026248/encrypt-users-password-in-seed-file
+
+def User.digest(string)
+  cost = ActiveModel::SecurePassword.min_cost ? BCrypt::Engine::MIN_COST :
+                                                BCrypt::Engine.cost
+  BCrypt::Password.create(string, cost: cost)
+end
+
+
 # Only run on development (local) instances not on production, etc.
 raise "Development seeds only (for now)!" unless Rails.env.development?
 
@@ -129,5 +139,60 @@ cat3.products.create!({
   price: 2_483.75
 })
 
+##USERS
+puts "Recreating users..."
+User.destroy_all
+
+User.create!({
+  name: "Tina Belcher",
+  email: "tinalovesyou@gmail.com",
+  password_digest: "#{User.digest('foobar')}"
+  })
+
+User.create!({
+  name: "Merlin",
+  email: "merly@gmail.com",
+  password_digest: "#{User.digest('foobar')}"
+  })
+
+User.create!({
+  name: "Damon",
+  email: "switchoff@gmail.com",
+  password_digest: "#{User.digest('foobar')}"
+  })
+
+##REVIEWS
+
+puts "Re-creating Reviews ..."
+Review.destroy_all
+
+Review.create!({
+  product_id: 1,
+  user_id: 1,
+  description: 'This does the thing.',
+  rating: 5
+  })
+
+Review.create!({
+  product_id: 3,
+  user_id: 2,
+  description: 'Meow meow meow.',
+  rating: 3
+  })
+
+Review.create!({
+  product_id: 2,
+  user_id: 3,
+  description: 'This is terrible.',
+  rating: 2
+  })
 
 puts "DONE!"
+
+
+
+
+
+
+
+
