@@ -144,7 +144,7 @@ puts "Recreating users..."
 User.destroy_all
 
 User.create!({
-  name: "Tina Belcher",
+  name: "Tina",
   email: "tinalovesyou@gmail.com",
   password_digest: "#{User.digest('foobar')}"
   })

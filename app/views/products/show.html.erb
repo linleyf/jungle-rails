@@ -25,19 +25,41 @@
         </dl>
       </div>
 
-              <h2>Add a review:</h2>
-        <%= form_for [@product, Review.new] do |f| %>
-      
-          <p>
-            <%= f.label 'Review' %><br>
-            <%= f.text_area :description %>
-          </p>
-          <p>
-            <%= f.submit %>
-          </p>
-        <% end %>
-         
-    
+      <h2>Add a review:</h2>
+      <%= form_for [@product, Review.new] do |f| %>
+        <p>
+          <%= f.label 'Review' %><br>
+          <%= f.text_area :description %>
+        </p>
+           <div class="form-group">
+            <%= f.label :rating %>
+            <%= f.select :rating, options_for_select(0..5), class: 'form-control' %>
+            <br>
+            <input class="btn btn-success" type="submit" value="Create Review">
+           </div>
+        <p> 
+          
+        </p>
+      <% end %>
+
+      <div class="col-sm-4">
+        <h2>Reviews</h2>
+          
+        <% @product.reviews.reverse_each do |review| %>
+          <div class= "well review-well">
+            <h4>
+              <%= review.user.name %>
+            </h4>
+            <p>
+              <strong>Rating</strong>
+              <%= review.rating %>
+            </p>
+            <p>
+              <strong>Review:</strong>
+              <%= review.description %>
+            </p>
+          </div>
+        <% end  %>
 
     </div>
 
